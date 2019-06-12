@@ -1192,7 +1192,11 @@
                 }
             }
             else {
-                el.setAttribute(name, value);
+                var actualValue = value;
+                if (name === 'class') {
+                  actualValue += ' ' + (el.getAttribute(name) || '');
+                }
+                el.setAttribute(name, actualValue);
             }
         };
         DefaultDomRenderer2.prototype.removeAttribute = function (el, name, namespace) {
@@ -1266,10 +1270,11 @@
             _this.hostAttr = shimHostAttribute(appId + '-' + component.id);
             return _this;
         }
-        EmulatedEncapsulationDomRenderer2.prototype.applyToHost = function (element) { _super.prototype.setAttribute.call(this, element, this.hostAttr, ''); };
+        EmulatedEncapsulationDomRenderer2.prototype.applyToHost = function (element) { _super.prototype.addClass.call(this, element, this.hostAttr); };
         EmulatedEncapsulationDomRenderer2.prototype.createElement = function (parent, name) {
             var el = _super.prototype.createElement.call(this, parent, name);
-            _super.prototype.setAttribute.call(this, el, this.contentAttr, '');
+            _super.prototype.setAttribute.call(this, el, 'class', this.contentAttr);
+            //_super.prototype.addClass.call(this, el, this.contentAttr);
             return el;
         };
         return EmulatedEncapsulationDomRenderer2;

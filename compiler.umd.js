@@ -8649,7 +8649,7 @@
             // In Android browser, the lastIndex is not reset when the regex is used in String.replace()
             _polyfillHostRe.lastIndex = 0;
             if (_polyfillHostRe.test(selector)) {
-                var replaceBy_1 = this.strictStyling ? "[" + hostSelector + "]" : scopeSelector;
+                var replaceBy_1 = this.strictStyling ? "." + hostSelector : scopeSelector;
                 return selector
                     .replace(_polyfillHostNoCombinatorRe, function (hnc, selector) {
                     return selector.replace(/([^:]*)(:*)(.*)/, function (_, before, colon, after) {
@@ -8672,7 +8672,7 @@
                 }
                 return parts[0];
             });
-            var attrName = '[' + scopeSelector + ']';
+            var className = '.' + scopeSelector;
             var _scopeSelectorPart = function (p) {
                 var scopedP = p.trim();
                 if (!scopedP) {
@@ -8687,7 +8687,7 @@
                     if (t.length > 0) {
                         var matches = t.match(/([^:]*)(:*)(.*)/);
                         if (matches) {
-                            scopedP = matches[1] + attrName + matches[2] + matches[3];
+                            scopedP = matches[1] + className + matches[2] + matches[3];
                         }
                     }
                 }
